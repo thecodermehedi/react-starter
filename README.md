@@ -4,7 +4,6 @@
 
 # React Starter
 
-</dib>
 
 ## Creation Process
 
@@ -37,3 +36,5 @@ npx tailwindcss init -p
 ```
 npm run dev
 ```
+
+</div>
