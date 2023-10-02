@@ -14,3 +14,5 @@
 - sweetalert2
 - tailwindcss
 - daisyui
+- firebase
+- react-toastify
