@@ -3,16 +3,14 @@
 <img src="./public/react.svg" width="120"/>
 
 # React Starter
+## v1.1.0
 
 </div>
 
 ## Packages:
+- firebase
 - react-router
 - react-icons
 - react-helmet-async
-- recharts
-- sweetalert2
 - tailwindcss
 - daisyui
-- firebase
-- react-toastify
