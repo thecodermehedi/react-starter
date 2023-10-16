@@ -9,7 +9,7 @@ import {AuthContext} from "./../../context/AuthProvider";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const {signUpWithEmail, setLoading} = useContext(AuthContext);
+  const {signUpWithEmail} = useContext(AuthContext);
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -53,16 +53,18 @@ const Signup = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user) {
-          updateProfile(user, {displayName: name})
+          updateProfile(user, {
+            displayName: name,
+            photoURL: photoURL,
+          })
             .then(() => {
               toast.success(`Welcome to our website, ${name}`);
-              return;
             })
             .catch((error) => {
               console.log(error.message);
-              return;
             });
         }
+        location.reload();
       })
       .catch((error) => {
         if (error?.message.includes("email-already-in-use")) {
@@ -70,7 +72,6 @@ const Signup = () => {
         }
         console.log(error);
       });
-    setLoading(false);
   };
   return (
     <>

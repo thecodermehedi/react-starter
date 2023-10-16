@@ -2,12 +2,18 @@ import PropTypes from "prop-types";
 import {IoSettingsOutline, IoLogOutOutline} from "react-icons/io5";
 import {CgMenuLeft} from "react-icons/cg";
 import {Link, NavLink} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import userPlaceholder from "../../assets/images/user.png";
-import { toast } from "sonner";
-import { AuthContext } from "../../context/AuthProvider";
+import {toast} from "sonner";
+import {AuthContext} from "../../context/AuthProvider";
 const Navbar = ({buttonText, buttonLink}) => {
   const {user, signOutUser} = useContext(AuthContext);
+  const [miniLoading, setMiniLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setMiniLoading(false);
+    }, 1200);
+  }, [user]);
   const handleLogOut = () => {
     signOutUser()
       .then(() => {
@@ -17,6 +23,7 @@ const Navbar = ({buttonText, buttonLink}) => {
         toast.error(error.message);
       });
   };
+
   const NavLinks = (
     <>
       <NavLink
@@ -79,14 +86,16 @@ const Navbar = ({buttonText, buttonLink}) => {
             to={"/"}
             className="text-2xl md:text-3xl lg:text-4xl font-bold text-white"
           >
-            REACT STARTER
+            REACTSTARTER
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-16">{NavLinks}</ul>
         </div>
         <div className="navbar-end">
-          {user ? (
+          {miniLoading ? (
+            <span className="loading loading-spinner loading-sm md:loading-md lg:loading-lg"></span>
+          ) : user ? (
             <div className="dropdown dropdown-end">
               <label
                 tabIndex={0}
@@ -108,7 +117,7 @@ const Navbar = ({buttonText, buttonLink}) => {
                 <li className="pt-3">
                   <Link to={"/settings"}>
                     {" "}
-                    <IoSettingsOutline /> Account
+                    <IoSettingsOutline /> Settings
                   </Link>
                 </li>
                 <li>
